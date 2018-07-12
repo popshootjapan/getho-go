@@ -11,7 +11,7 @@ go get github.com/cryptokyo/getho-go
 ## How to use
 
 ```
-infuraClient := infura.New("<YOUR DOMAIN>")
+gethoClient := getho.New("<YOUR DOMAIN>")
 
 input := &getho.EthGetBalanceInput{
     Address:        "0x5c66b0d82df26e8FE165Be6628F5f5e1f1bccD5C",
