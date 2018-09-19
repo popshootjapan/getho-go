@@ -5,13 +5,13 @@
 To install `getho-go`, simply execute the following command in a terminal from your `$GOPATH`:
 
 ```
-go get github.com/cryptokyo/getho-go
+go get github.com/popshootjapan/getho-go
 ```
 
 ## How to use
 
 ```
-gethoClient := getho.New("<YOUR DOMAIN>")
+gethoClient := getho.New("<YOUR DOMAIN>", nil)
 
 input := &getho.EthGetBalanceInput{
     Address:        "0x5c66b0d82df26e8FE165Be6628F5f5e1f1bccD5C",

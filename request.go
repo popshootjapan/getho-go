@@ -50,7 +50,7 @@ func (g *Getho) newRequest(input input, output interface{}) (req *Request) {
 		body = []byte{}
 	}
 
-	url := "https://" + g.domain + ".getho.io/jsonrpc"
+	url := g.GetURLString() + "/jsonrpc"
 
 	httpReq, _ := http.NewRequest("POST", url, bytes.NewReader(body))
 	httpReq.Header.Add("Content-Type", "application/json")

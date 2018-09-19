@@ -3,17 +3,17 @@ package getho_test
 import (
 	"testing"
 
-	getho "github.com/cryptokyo/getho-go"
+	getho "github.com/popshootjapan/getho-go"
 )
 
 func TestApi(t *testing.T) {
-	cli, err := getho.New("forward-tick-cf5499a16187")
+	cli, err := getho.New("candid-lion-93555", &getho.Options{Scheme: "https://", Host: "getho.io"})
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
 
 	input := &getho.EthGetBalanceInput{
-		Address:        "0x5c66b0d82df26e8FE165Be6628F5f5e1f1bccD5C",
+		Address:        "0xb1f407dcc37cdc0d5193c09f499d3766aa4c5743",
 		BlockParameter: getho.NewBlockParameter("latest"),
 	}
 
