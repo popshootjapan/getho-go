@@ -1,6 +1,6 @@
 package getho
 
-import "errors"
+import "fmt"
 
 type Getho struct {
 	scheme string
@@ -14,10 +14,6 @@ type Options struct {
 }
 
 func New(domain string, opts *Options) (*Getho, error) {
-	if len(domain) == 0 {
-		return nil, errors.New("domain length is zero.")
-	}
-
 	var (
 		scheme string
 		host   string
@@ -45,5 +41,9 @@ func New(domain string, opts *Options) (*Getho, error) {
 }
 
 func (g *Getho) GetURLString() string {
-	return g.scheme + g.domain + "." + g.host
+	if len(g.domain) == 0 {
+		return fmt.Sprintf("%s%s", g.scheme, g.host)
+	} else {
+		return fmt.Sprintf("%s%s.%s", g.scheme, g.domain, g.host)
+	}
 }
