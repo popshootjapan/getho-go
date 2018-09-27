@@ -400,6 +400,56 @@ type EthGetBlockTransactionCountByNumberOutput struct {
 	Result string `json:"result"`
 }
 
+//  EthSendTransactionRequest generates a request which calls JSON-RPC method of "eth_sendTransaction" for go-ethereum's RPC API.
+//
+// 	Example call a request using the  method.
+//
+// 	req, resp := cli.EthSendTransactionRequest(&getho.EthSendTransactionInput{
+//  From: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
+//  To: "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
+//  Gas: "0x76c0", // 30400
+//  GasPrice: "0x9184e72a000", // 10000000000000
+//  Value: "0x9184e72a", // 2441406250
+//  Data: "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"})
+//  err := req.Call()
+//  if err != nil {
+//    fmt.Println(err)
+//	}
+//  fmt.Println(resp)
+//
+// See also, https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_sendtransaction
+func (g *Getho) EthSendTransactionRequest(input *EthSendTransactionInput) (req *Request, output *EthSendTransactionOutput) {
+	if input == nil {
+		input = &EthSendTransactionInput{}
+	}
+
+	output = &EthSendTransactionOutput{}
+	req = g.newRequest(input, output)
+	return
+}
+
+type EthSendTransactionInput struct {
+	From     string
+	To       string
+	Gas      string
+	GasPrice string
+	Value    string
+	Data     string
+}
+
+func (g *EthSendTransactionInput) method() string {
+	return "eth_sendTransaction"
+}
+
+func (g *EthSendTransactionInput) params() interface{} {
+	return []string{g.Data}
+}
+
+type EthSendTransactionOutput struct {
+	Error  *Error `json:"error"`
+	Result string `json:"result"`
+}
+
 //  EthSendRawTransactionRequest generates a request which calls JSON-RPC method of "eth_sendRawTransaction" for go-ethereum's RPC API.
 //
 // 	Example call a request using the  method.
