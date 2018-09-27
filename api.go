@@ -278,7 +278,7 @@ func (g *EthGetBalanceInput) params() interface{} {
 }
 
 type EthGetBalanceOutput struct {
-	// Error  *Error `json:"error"`
+	Error  *Error `json:"error"`
 	Result string `json:"result"`
 }
 
