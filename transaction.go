@@ -3,18 +3,24 @@ package getho
 import "fmt"
 
 type Transaction struct {
-	From     string  `json:"from"`
-	Gas      string  `json:"gas"`
+	From     *string `json:"from"`
+	Gas      *string `json:"gas"`
 	GasPrice *string `json:"gasPrice"`
 	To       *string `json:"to"`
 	Value    *string `json:"value"`
-	Data     string  `json:"data"`
+	Data     *string `json:"data"`
 }
 
 func (tx *Transaction) toMap() map[string]interface{} {
 	txMap := make(map[string]interface{})
-	txMap["from"] = tx.From
-	txMap["gas"] = tx.Gas
+
+	if tx.From != nil {
+		txMap["from"] = tx.From
+	}
+
+	if tx.Gas != nil {
+		txMap["gas"] = tx.Gas
+	}
 
 	if tx.GasPrice != nil {
 		txMap["gasPrice"] = tx.GasPrice
@@ -28,9 +34,7 @@ func (tx *Transaction) toMap() map[string]interface{} {
 		txMap["value"] = tx.Value
 	}
 
-	if len(tx.Data) == 0 {
-		txMap["data"] = "0x"
-	} else {
+	if tx.Data != nil {
 		txMap["data"] = tx.Data
 	}
 
