@@ -405,12 +405,15 @@ type EthGetBlockTransactionCountByNumberOutput struct {
 // 	Example call a request using the  method.
 //
 // 	req, resp := cli.EthSendTransactionRequest(&getho.EthSendTransactionInput{
-//  From: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-//  To: "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
-//  Gas: "0x76c0", // 30400
-//  GasPrice: "0x9184e72a000", // 10000000000000
-//  Value: "0x9184e72a", // 2441406250
-//  Data: "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"})
+//		Transaction: getho.Transaction{
+//  		From: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
+//  		To: "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
+//  		Gas: "0x76c0", // 30400
+//  		GasPrice: "0x9184e72a000", // 10000000000000
+//  		Value: "0x9184e72a", // 2441406250
+//  		Data: "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"})
+//		}
+//	}
 //  err := req.Call()
 //  if err != nil {
 //    fmt.Println(err)
@@ -429,12 +432,7 @@ func (g *Getho) EthSendTransactionRequest(input *EthSendTransactionInput) (req *
 }
 
 type EthSendTransactionInput struct {
-	From     string
-	To       string
-	Gas      string
-	GasPrice string
-	Value    string
-	Data     string
+	Transaction Transaction
 }
 
 func (g *EthSendTransactionInput) method() string {
@@ -442,7 +440,7 @@ func (g *EthSendTransactionInput) method() string {
 }
 
 func (g *EthSendTransactionInput) params() interface{} {
-	return []string{g.Data}
+	return g.Transaction.toMap()
 }
 
 type EthSendTransactionOutput struct {

@@ -15,15 +15,15 @@ func (tx *Transaction) toMap() map[string]interface{} {
 	txMap := make(map[string]interface{})
 
 	if tx.From != nil {
-		txMap["from"] = tx.From
+		txMap["from"] = *tx.From
 	}
 
 	if tx.Gas != nil {
-		txMap["gas"] = tx.Gas
+		txMap["gas"] = *tx.Gas
 	}
 
 	if tx.GasPrice != nil {
-		txMap["gasPrice"] = tx.GasPrice
+		txMap["gasPrice"] = *tx.GasPrice
 	}
 
 	if tx.To != nil {
@@ -31,11 +31,15 @@ func (tx *Transaction) toMap() map[string]interface{} {
 	}
 
 	if tx.Value != nil {
-		txMap["value"] = tx.Value
+		txMap["value"] = *tx.Value
 	}
 
 	if tx.Data != nil {
-		txMap["data"] = tx.Data
+		if len(*tx.Data) == 0 {
+			txMap["data"] = "0x"
+		} else {
+			txMap["data"] = *tx.Data
+		}
 	}
 
 	return txMap
