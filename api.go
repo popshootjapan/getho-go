@@ -440,7 +440,7 @@ func (g *EthSendTransactionInput) method() string {
 }
 
 func (g *EthSendTransactionInput) params() interface{} {
-	return g.Transaction.toMap()
+	return []interface{}{g.Transaction.toMap()}
 }
 
 type EthSendTransactionOutput struct {
