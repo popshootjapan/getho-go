@@ -63,7 +63,7 @@ func (tx *Transaction) String() string {
 
 type RawTransaction struct {
 	Transaction
-	BlockHash        string   `json:"blockHash"`
+	BlockHash        *string  `json:"blockHash"`
 	BlockNumber      *big.Int `json:"blockNumber"`
 	Hash             string   `json:"hash"`
 	Input            string   `json:"input"`
@@ -82,7 +82,7 @@ func (tx *RawTransaction) String() string {
 		tx.GasPrice.String(),
 		tx.Value.String(),
 		getString(tx.Data),
-		tx.BlockHash,
+		getString(tx.BlockHash),
 		tx.BlockNumber.String(),
 		tx.Hash,
 		tx.Input,
